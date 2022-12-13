@@ -1,7 +1,7 @@
 colors = %w[ч к з]
 
 loop do
-  puts 'Выбери! Черное или красное? (ч/к/з)'
+  puts 'Выбери! Черное, красное, или зелёное? (ч/к/з)'
   answer = gets.strip
   rand = colors.sample
   if rand == answer
