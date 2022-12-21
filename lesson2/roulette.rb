@@ -16,7 +16,7 @@ end
 def play(balance)
   current_balance = balance
   bet_data = place_bet(current_balance)
-  current_balance = bet_data['balance_after']
+  current_balance -= bet_data['bet_amount']
   roulette_color = get_spin_result
   if bet_data['bet_color'] == roulette_color
     win_amount = bet_data['bet_amount'] * SETTINGS["#{roulette_color}_win_multiplier"]

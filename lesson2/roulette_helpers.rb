@@ -41,8 +41,7 @@ def place_bet(player_balance)
   puts "You placed #{bet_amount} on #{bet_color} and..."
   {
     'bet_color' => bet_color,
-    'bet_amount' => bet_amount,
-    'balance_after' => player_balance - bet_amount
+    'bet_amount' => bet_amount
   }
 end
 
