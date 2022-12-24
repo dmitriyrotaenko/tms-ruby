@@ -4,10 +4,6 @@
 # Если D < 0, то выводим дискриминант и сообщение "Корней нет"
 # Подсказка: Алгоритм решения с блок-схемой (www.bolshoyvopros.ru). Для вычисления квадратного корня, нужно использовать
 
-def calculate_discriminant(a, b, c)
-  b**2 - 4 * a * c
-end
-
 def calculate_roots(b, d, a)
   {
     'x1' => (-b + Math.sqrt(d)) / 2 * a,
@@ -19,13 +15,12 @@ loop do
   puts "Введите 3 коэффициента числа (a, b, c) по которым хотите вычислить дискриминант. \n" \
        'Числа разделяйте пробелом, например (5 11 3):'
   user_input = gets.chomp.split(' ').map(&:to_f)
-  rates = {
-    'a' => user_input[0],
-    'b' => user_input[1],
-    'c' => user_input[2]
-  }
-  discriminant = calculate_discriminant(rates['a'], rates['b'], rates['c'])
-  roots = calculate_roots(rates['b'], discriminant, rates['a'])
+  a = user_input[0]
+  b = user_input[1]
+  c = user_input[2]
+
+  discriminant = b**2 - 4 * a * c
+  roots = calculate_roots(b, discriminant, a)
 
   if discriminant > 0
     puts "Дескриминант: #{discriminant} \n Первый корень: #{roots['x1']} \n Второй корень: #{roots['x2']}"
