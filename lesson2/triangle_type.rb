@@ -12,9 +12,8 @@ loop do
   shortest = sides[0]
   mid = sides[1]
   longest = sides[2]
-  is_right_angled = longest**2 == (shortest**2 + mid**2)
 
-  puts 'Этот трегольник прямоугольный' if is_right_angled
+  puts 'Этот трегольник прямоугольный' if longest**2 == (shortest**2 + mid**2)
   puts 'Этот треугольник равнобедренный и равносторонний' if sides.uniq.size == 1
   puts 'Этот треугольник равнобедренный' if sides.uniq.size == 2
 end
