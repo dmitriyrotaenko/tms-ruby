@@ -1,25 +1,37 @@
 SETTINGS = {
-  'available_colors' => %w[red black green],
+  'available_colors' => [],
   'initial_balance' => 100,
-  'red_win_multiplier' => 2,
-  'black_win_multiplier' => 2,
-  'green_win_multiplier' => 36,
-  'red_chance' => 45,
-  'black_chance' => 45,
-  'green_chance' => 10
+  'colors_config' => {
+    # [chance, multiplier]
+    'red' => [45, 2],
+    'black' => [45, 2],
+    'green' => [10, 36]
+  }
 }.freeze
 
-def get_total_percentage
-  SETTINGS['red_chance'] + SETTINGS['black_chance'] + SETTINGS['green_chance']
+def set_available_colors
+  SETTINGS['colors_config'].each do |color, _|
+    SETTINGS['available_colors'] << color
+  end
+end
+
+def total_win_chances
+  total_win_percentage = 0
+  SETTINGS['colors_config'].each_value do |color|
+    total_win_percentage += color[0]
+  end
+  # percentage can't exceed 100
+  total_win_percentage if total_win_percentage == 100
 end
 
 def ask_color
-  puts 'What\'s your color (red, black, green): '
+  colors = SETTINGS['available_colors'].join(', ')
+  puts "What's your color: #{colors}: "
   color = gets.chomp
   if SETTINGS['available_colors'].include?(color)
     color
   else
-    puts 'Must be red, black, or green'
+    puts "Must be one of #{colors}"
     ask_color
   end
 end
@@ -45,13 +57,12 @@ def place_bet(player_balance)
   }
 end
 
-def get_spin_result(max_percent = get_total_percentage)
+def spin(max_percent = total_win_chances)
   random_percent = rand(1..max_percent)
-  if random_percent <= SETTINGS['red_chance']
-    'red'
-  elsif random_percent > SETTINGS['red_chance'] && random_percent <= max_percent - SETTINGS['green_chance']
-    'black'
-  else
-    'green'
+  current_threshold = SETTINGS['colors_config'].values[0][0]
+  SETTINGS['colors_config'].each_with_index do |(color, _), idx|
+    return color if random_percent <= current_threshold
+
+    current_threshold += SETTINGS['colors_config'].values[idx + 1][0]
   end
 end
