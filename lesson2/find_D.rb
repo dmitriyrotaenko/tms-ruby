@@ -4,28 +4,27 @@
 # Если D < 0, то выводим дискриминант и сообщение "Корней нет"
 # Подсказка: Алгоритм решения с блок-схемой (www.bolshoyvopros.ru). Для вычисления квадратного корня, нужно использовать
 
-def calculate_roots(b, d, a)
-  {
-    'x1' => (-b + Math.sqrt(d)) / 2 * a,
-    'x2' => (-b - Math.sqrt(d)) / 2 * a
-  }
-end
-
 loop do
   puts "Введите 3 коэффициента числа (a, b, c) по которым хотите вычислить дискриминант. \n" \
        'Числа разделяйте пробелом, например (5 11 3):'
   user_input = gets.chomp.split(' ').map(&:to_f)
   a = user_input[0]
+  if a == 0
+    puts "'a' не может быть нулём \nВыход из программы..."
+    exit
+  end
   b = user_input[1]
   c = user_input[2]
 
   discriminant = b**2 - 4 * a * c
-  roots = calculate_roots(b, discriminant, a)
 
   if discriminant > 0
-    puts "Дескриминант: #{discriminant} \n Первый корень: #{roots['x1']} \n Второй корень: #{roots['x2']}"
+    x1 = (-b + Math.sqrt(discriminant)) / 2 * a
+    x2 = (-b + Math.sqrt(discriminant)) / 2 * a
+    puts "Дескриминант: #{discriminant} \n Первый корень: #{x1} \n Второй корень: #{x2}"
   elsif discriminant == 0
-    puts "Дескриминант: #{discriminant} \n Корни: #{roots['x1']}"
+    x = -b / (2 * a)
+    puts "Дескриминант: #{discriminant} \n Корни: #{x}"
   else
     puts "Дескриминант: #{discriminant} \n Корней нет."
   end
