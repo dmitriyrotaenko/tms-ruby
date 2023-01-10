@@ -4,23 +4,19 @@ nums = [1, 0, -200, 1.2, -44.5, 2, 6, 50, 50, 1, 0, -200, -250, 1000, 100_000_00
 def sort(arr, direction = 'asc')
   return arr if arr.empty? || arr.size == 1
 
-  sorted_arr = [] + arr
-  pointer_1 = 0
-  while pointer_1 < sorted_arr.size
-    pointer_2 = pointer_1
-    min_num = sorted_arr[pointer_1]
-    min_idx = pointer_1
-    while pointer_2 < sorted_arr.size
-      if min_num > sorted_arr[pointer_2]
-        min_num = sorted_arr[pointer_2]
-        min_idx = pointer_2
+  sorted_arr = arr.dup
+  0.upto(sorted_arr.size - 1) do |idx|
+    min_num = sorted_arr[idx]
+    min_idx = idx
+    idx.upto(sorted_arr.size - 1) do |idx2|
+      if min_num > sorted_arr[idx2]
+        min_num = sorted_arr[idx2]
+        min_idx = idx2
       end
-      pointer_2 += 1
     end
-    temp = sorted_arr[pointer_1]
-    sorted_arr[pointer_1] = min_num
+    temp = sorted_arr[idx]
+    sorted_arr[idx] = min_num
     sorted_arr[min_idx] = temp
-    pointer_1 += 1
   end
   direction == 'desc' ? sorted_arr.reverse : sorted_arr
 end
