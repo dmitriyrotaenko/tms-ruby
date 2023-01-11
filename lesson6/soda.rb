@@ -1,5 +1,5 @@
 # Instances of the class can be initialized with an addition.
-# An instance uses the show_my_drink method to log
+# An instance uses the show_my_drink method to log soda type
 class Soda
 
   def initialize(additive = '')
