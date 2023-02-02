@@ -9,7 +9,7 @@
 class TriangleChecker
   REQUIRED_NUMBER_OF_SIDES = 3
 
-  def initialize(*sides)
+  def initialize(sides)
     if sides.size == REQUIRED_NUMBER_OF_SIDES
       @sides = sides
     else
@@ -57,8 +57,8 @@ class TriangleChecker
 
 end
 
-valid_triangle = TriangleChecker.new(1, 2, 2)
+valid_triangle = TriangleChecker.new([1, 2, 2])
 valid_triangle.triangle? #=> 'Ура, можно построить треугольник!'
 
-invalid_triangle = TriangleChecker.new(1, 2, 3)
+invalid_triangle = TriangleChecker.new([1, 2, 3])
 invalid_triangle.triangle? #=> Жаль, но из этого треугольник не сделать.
