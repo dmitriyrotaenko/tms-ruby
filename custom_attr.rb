@@ -3,7 +3,7 @@ module CustomAttrReader
   def my_custom_attr_reader(*attrs)
     attrs.each do |attr|
       define_method(attr) do
-        self.attr
+        instance_variable_get("@#{attr}")
       end
     end
     puts "Аттрибуты #{attrs}"
@@ -20,10 +20,6 @@ class A
     @b = b
   end
 end
-
-
-
-
 
 test = A.new(1, 2)
 
