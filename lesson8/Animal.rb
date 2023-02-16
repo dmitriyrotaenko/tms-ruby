@@ -3,10 +3,27 @@
 # Также у него должен быть метод класса, выводящий это количество
 
 class Animal
+
   @@total = 0
 
-  def initialize
+  attr_reader :food, :location, :animal
+
+  def initialize(food, location)
     @@total += 1
+    @food = food
+    @location = location
+  end
+
+  def make_noise
+    puts "#{animal} говорит"
+  end
+
+  def eat
+    puts "#{animal} ест"
+  end
+
+  def sleep
+    puts "#{animal} спит"
   end
 
   def self.log_total
@@ -14,14 +31,63 @@ class Animal
   end
 end
 
-class Dog < Animal; end
-class Cat < Animal; end
-class Horse < Animal; end
+class Dog < Animal
+  
+  attr_reader :breed
+  
+  def initialize(food, location, breed)
+    @animal = 'Собака'
+    @breed = breed
+    super(food, location)
+  end
 
-cat = Cat.new
-dog = Dog.new
-horse = Horse.new
-horse_2 = Horse.new
+  def make_noise
+    puts "Встаёт на задние лапы и гавкает"
+  end
 
+  def eat
+    puts 'Ест и чавкает'
+  end
+end
 
-puts Animal.log_total
+class Cat < Animal
+
+  attr_reader :breed
+
+  def initialize(food, location, breed)
+    @breed = breed
+    @animal = 'Кошка'
+    super(food, location)
+  end
+end
+
+class Horse < Animal
+
+  attr_reader :breed
+
+  def initialize(food, location, breed)
+    @breed = breed
+    @animal = 'Лошадь'
+    super(food, location)
+  end
+end
+
+class Vet
+
+  def treatAnimal(animal)
+    puts "Animal eats: #{animal.food}. \n Animal is in #{animal.location}"
+  end
+end
+
+cat = Cat.new('Acana', 'Izmir', 'Siamese')
+dog = Dog.new('Grandorf', 'Minsk', 'Pug')
+horse = Horse.new('Grass', 'Netherlands', 'Arabian')
+
+puts Animal.log_total #=> 3
+
+dog.make_noise #=> Собака говорит
+cat.make_noise #=> Кошка говорит
+cat.breed #=> Siamese
+horse.eat #=> Лошадь ест
+dog.eat #=> Ест и чавкает
+
