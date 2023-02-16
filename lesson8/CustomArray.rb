@@ -1,3 +1,6 @@
+# Создать свой аналог класса Array, String, Hash (на выбор).
+# При этом все методы класса должны хранится в разделенных по смыслу модулях (модули создание, добавления,
+# удаления, вывода, каких-либо изменений
 
 module Addable
   def push(new_element)
@@ -25,10 +28,17 @@ module Updatable
   end
 end
 
+module Printable
+  def print
+    puts data.to_s
+  end
+end
+
 class CustomArray
   include Removable
   include Addable
   include Updatable
+  include Printable
 
   attr_reader :data
 
@@ -45,4 +55,4 @@ my_array.pop(2)
 my_array.shift
 my_array.shuffle
 
-puts my_array.data.to_s
+my_array.print
