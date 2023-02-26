@@ -1,0 +1,93 @@
+Started GET "/" for 127.0.0.1 at 2023-02-26 19:41:05 +0300
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/dmitriyrotaenko/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/railties-6.1.7.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/dmitriyrotaenko/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/railties-6.1.7.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 9.2ms | Allocations: 535)
+Completed 200 OK in 37ms (Views: 20.7ms | ActiveRecord: 0.0ms | Allocations: 4459)
+
+
+Started GET "/jokes/random" for 127.0.0.1 at 2023-02-26 19:41:07 +0300
+Processing by JokesController#random as HTML
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.0ms | Allocations: 2031)
+
+
+  
+NameError (uninitialized constant JokesController::HTTP):
+  
+app/controllers/jokes_controller.rb:26:in `fetch_data'
+app/controllers/jokes_controller.rb:8:in `random'
+Started GET "/" for 127.0.0.1 at 2023-02-26 19:41:12 +0300
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/dmitriyrotaenko/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/railties-6.1.7.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/dmitriyrotaenko/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/railties-6.1.7.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 18.0ms | Allocations: 231)
+Completed 200 OK in 22ms (Views: 19.7ms | ActiveRecord: 0.0ms | Allocations: 976)
+
+
+Started GET "/jokes/random" for 127.0.0.1 at 2023-02-26 19:58:14 +0300
+Processing by JokesController#random as HTML
+Completed 500 Internal Server Error in 15ms (Allocations: 2032)
+
+
+  
+NameError (uninitialized constant JokesController::HTTP):
+  
+app/controllers/jokes_controller.rb:26:in `fetch_data'
+app/controllers/jokes_controller.rb:8:in `random'
+Started GET "/jokes/random" for 127.0.0.1 at 2023-02-26 19:59:21 +0300
+Processing by JokesController#random as HTML
+Completed 500 Internal Server Error in 6ms (Allocations: 2024)
+
+
+  
+NameError (uninitialized constant JokesController::HTTP):
+  
+app/controllers/jokes_controller.rb:26:in `fetch_data'
+app/controllers/jokes_controller.rb:8:in `random'
+Started GET "/" for 127.0.0.1 at 2023-02-26 20:01:07 +0300
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/dmitriyrotaenko/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/railties-6.1.7.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/dmitriyrotaenko/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/railties-6.1.7.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 16.7ms | Allocations: 362)
+Completed 200 OK in 52ms (Views: 30.9ms | ActiveRecord: 0.0ms | Allocations: 2678)
+
+
+Started GET "/jokes/random" for 127.0.0.1 at 2023-02-26 20:01:13 +0300
+Processing by JokesController#random as HTML
+Completed 200 OK in 538ms (Views: 0.7ms | ActiveRecord: 0.0ms | Allocations: 3996)
+
+
+Started GET "/jokes/random?category=animal" for 127.0.0.1 at 2023-02-26 20:01:17 +0300
+Processing by JokesController#random as HTML
+  Parameters: {"category"=>"animal"}
+Completed 200 OK in 352ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 3626)
+
+
+Started GET "/jokes/random?categories" for 127.0.0.1 at 2023-02-26 20:01:30 +0300
+Processing by JokesController#random as HTML
+  Parameters: {"categories"=>nil}
+Completed 200 OK in 376ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 3599)
+
+
+Started GET "/jokes/random?categories" for 127.0.0.1 at 2023-02-26 20:01:40 +0300
+Processing by JokesController#random as HTML
+  Parameters: {"categories"=>nil}
+Completed 200 OK in 175ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 3595)
+
+
+Started GET "/jokes/random?categories" for 127.0.0.1 at 2023-02-26 20:01:41 +0300
+Processing by JokesController#random as HTML
+  Parameters: {"categories"=>nil}
+Completed 200 OK in 409ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 3593)
+
+
+Started GET "/jokes/categories" for 127.0.0.1 at 2023-02-26 20:01:48 +0300
+Processing by JokesController#categories as HTML
+Completed 200 OK in 155ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 3717)
+
+
+Started GET "/jokes/search?query=hello" for 127.0.0.1 at 2023-02-26 20:02:28 +0300
+Processing by JokesController#search as HTML
+  Parameters: {"query"=>"hello"}
+Completed 200 OK in 360ms (Views: 2.4ms | ActiveRecord: 0.0ms | Allocations: 4188)
+
+
