@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+BASE_URL = 'https://api.chucknorris.io/jokes'
+
+JSON(HTTP.get("#{BASE_URL}/categories")).each do |category_name|
+  category = Category.create(name: category_name)
+  10.times do |n|
+    Joke.create(
+      text: JSON(HTTP.get("#{BASE_URL}/random?category=#{category.name}"))['value'],
+      category_id: category.id)
+  end
+end
