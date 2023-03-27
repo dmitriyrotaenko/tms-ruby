@@ -1,28 +1,24 @@
 class JokesController < ApplicationController
-  BASE_URL = 'https://api.chucknorris.io'.freeze
+
   def random
-    category = params['category']
-    if category.presence
-      random_by_category(category)
-    else
-      render json: fetch_data('/jokes/random')['value']
-    end
+    category = params[:category]
+    return random_by_category(category) if category.presence
+
+    render json: Joke.pluck(:text).sample
   end
 
   def categories
-    render json: fetch_data('/jokes/categories')
-  end
-
-  def random_by_category(category)
-    render json: fetch_data("/jokes/random?category=#{category}")['value']
+    render json: Category.pluck(:name)
   end
 
   def search
-    query = params['query']
-    render json: fetch_data("/jokes/search?query=#{query}")
+    query = params[:query]
+    render json: Joke.where("text LIKE ?", "%#{query}%")
   end
 
-  def fetch_data(url)
-    JSON(HTTP.get("#{BASE_URL}#{url}"))
+  private
+
+  def random_by_category(category)
+    render json: Joke.where(:category_id => Category.where(:name => category)).pluck(:text).sample
   end
 end
