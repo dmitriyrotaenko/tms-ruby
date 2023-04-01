@@ -1,8 +1,20 @@
 class CurrenciesController < ApplicationController
-  BASE_URL = 'https://www.freeforexapi.com/api/live'
+  API_URL = 'https://www.freeforexapi.com'.freeze
+  API_PATH = '/api/live'.freeze
+  API_QUERY = '?pairs='.freeze
 
   def index
-    render json: separate_pairs(CurrencyFetcher.call(BASE_URL))
+    render json: separate_pairs(CurrencyFetcher.call(API_URL + API_PATH))
+  end
+
+  # How to show implicitly that this method can accept params?
+  def convert
+    render json: Converter.call({
+      from: params[:from],
+      to: params[:to],
+      amount: params[:amount],
+      full_url: full_url
+    })
   end
 
   private
@@ -12,5 +24,9 @@ class CurrenciesController < ApplicationController
          .flat_map { |from, to| [from, to] }
          .uniq
          .sort
+  end
+
+  def full_url
+    API_URL + API_PATH + API_QUERY
   end
 end

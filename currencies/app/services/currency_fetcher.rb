@@ -1,11 +1,6 @@
 # How to initialize inside a module?
-
-class CurrencyFetcher
-  def self.call(url)
-    new.call(url)
-  end
-
+class CurrencyFetcher < HttpFetcher
   def call(url)
-    JSON.parse(HTTP.get(url))['supportedPairs']
+    super(url)['supportedPairs']
   end
 end
