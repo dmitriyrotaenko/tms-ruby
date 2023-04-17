@@ -1,43 +1,29 @@
-class CurrenciesController < ApplicationController
-  API_URL = 'https://www.freeforexapi.com'.freeze
-  API_PATH = '/api/live'.freeze
-  API_QUERY = '?pairs='.freeze
+# frozen_string_literal: true
 
-  UPDATE_RATE_AFTER_HOUR = 1
+class CurrenciesController < ApplicationController
+  API_URL = 'https://www.freeforexapi.com'
+  API_PATH = '/api/live'
 
   def index
-    render json: separate_pairs(
-      HttpFetcher.call(API_URL + API_PATH)[:data]['supportedPairs']
+    currencies_request = HttpFetcher.call(API_URL + API_PATH)
+    render json: remove_duplicates(
+      FieldExtractor.call({ obj: currencies_request, field: 'supportedPairs' })
     )
   end
 
-  # How to show implicitly that this method can accept params?
   def convert
-    from = params[:from]
-    to = params[:to]
-    conv_manager = Currency::ConversionManager.new
-    rate = conv_manager.find({ from: from, to: to })&.[](:rate)
-    
-    if rate.nil?
-      api_request = HttpFetcher.call(full_url + from + to)
-      if api_request.key?(:data)
-        rate = api_request[:data]['rates'][from + to]['rate']
-        conv_manager.add({ from: from, to: to, rate: rate })
-      end
-    end
-    render json: Currency::Converter.call({ amount: params[:amount], rate: rate })
+    render json: Currency::Converter.call({
+      amount: params[:amount],
+      rate: Currency::Rate.call({ from: params[:from], to: params[:to] })
+    })
   end
 
   private
-  
-  def separate_pairs(pairs)
+
+  def remove_duplicates(pairs)
     pairs.map { |pair| [pair[0..2], pair[3..]] }
          .flat_map { |from, to| [from, to] }
          .uniq
          .sort
-  end
-
-  def full_url
-    API_URL + API_PATH + API_QUERY
   end
 end
