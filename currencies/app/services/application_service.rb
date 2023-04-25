@@ -1,5 +1,5 @@
 class ApplicationService
-  def self.call(params)
-    new.call(params)
+  def self.call(*params)
+    new.call(*params)
   end
 end

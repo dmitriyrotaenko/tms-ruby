@@ -5,9 +5,6 @@ class CurrenciesController < ApplicationController
   end
 
   def convert
-    render json: Currency::Converter.call({
-      amount: params[:amount],
-      rate: Currency::Rate.call({ from: params[:from], to: params[:to] })
-    })
+    render json: Currency::Converter.call(params[:amount], params[:from], params[:to])
   end
 end
