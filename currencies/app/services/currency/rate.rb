@@ -18,15 +18,7 @@ module Currency
       if db_record && rate_up_to_date?(db_record)
         { code: OK, data: db_record[:rate] }
       else
-        begin
-          rate = rate_from_api(from, to)
-          Conversion.create(from: from, to: to, rate: rate)
-        rescue NoRateError => e
-          return { code: NO_RATE, data: nil, err_msg: e }
-        rescue UnsupportedPair => e
-          return { code: PAIR_NOT_SUPPORTED, data: nil, err_msg: e }
-        end
-        { code: OK, data: rate }
+        add_rate_to_db(from, to)
       end
     end
 
@@ -34,6 +26,16 @@ module Currency
 
     def rate_up_to_date?(record)
       record.updated_at > UPDATE_THRESHOLD
+    end
+
+    def add_rate_to_db(from, to)
+      rate = rate_from_api(from, to)
+      Conversion.create(from: from, to: to, rate: rate)
+      { code: OK, data: rate }
+    rescue NoRateError => e
+      { code: NO_RATE, data: nil, err_msg: e }
+    rescue UnsupportedPair => e
+      { code: PAIR_NOT_SUPPORTED, data: nil, err_msg: e }
     end
 
     def rate_from_api(from, to)
