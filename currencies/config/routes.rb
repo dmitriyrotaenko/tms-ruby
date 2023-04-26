@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
 
+  root to: 'currencies#index'
 
-  # resources :currencies do
-    # get :currencies
-
-  get '/currencies', to: 'currencies#index'
-  get '/currencies/convert', to: 'currencies#convert'
-  get '/currencies/history', to: 'currencies#history'
-  # end
+  get '/convert', to: 'currencies#convert'
+  get '/history', to: 'currencies#history'
 end
