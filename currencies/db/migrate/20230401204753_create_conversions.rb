@@ -3,9 +3,10 @@ class CreateConversions < ActiveRecord::Migration[6.1]
     create_table :conversions do |t|
       t.string :from
       t.string :to
-      t.decimal :rate, null: true
+      t.decimal :rate
 
       t.timestamps
+      add_index :conversions, %i[from to]
     end
   end
 end
