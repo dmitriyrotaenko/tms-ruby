@@ -6,7 +6,7 @@ module Currency
 
     API_URL = 'https://www.freeforexapi.com/api/live'
     API_QUERY = '?pairs='
-    UPDATE_TRESHOLD = 1.hour.ago
+    UPDATE_THRESHOLD = 1.hour.ago
     OK = 200
     NO_RATE = 404
     PAIR_NOT_SUPPORTED = 1002
@@ -33,7 +33,7 @@ module Currency
     private
 
     def rate_up_to_date?(record)
-      record.updated_at > UPDATE_TRESHOLD
+      record.updated_at > UPDATE_THRESHOLD
     end
 
     def rate_from_api(from, to)
